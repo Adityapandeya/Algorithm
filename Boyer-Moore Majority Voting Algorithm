@@ -1,0 +1,49 @@
+what's?
+ The Boyer-Moore Majority Vote Algorithm is a method for finding the majority element in a sequence of elements.
+The majority element is the element that appears more than n/2 times in a sequence of n elements.
+This algorithm is efficient and widely used for this purpose.
+
+why do we use?
+
+The Boyer-Moore Majority Vote Algorithm is used because of its efficiency and simplicity. It's particularly useful when you need to find the majority element in a large sequence of elements without using extra memory or performing multiple passes through the sequence. This algorithm is often employed in various applications, such as data analysis, stream processing, and algorithmic problems where finding the majority element is a key task.
+
+Example:
+
+public class BoyerMooreVotingAlgorithm {
+    public int findMajorityElement(int[] nums) {
+        int count = 0;
+        int candidate = 0;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        // Second pass to confirm the candidate
+        count = 0;
+        for (int num : nums) {
+            if (num == candidate) {
+                count++;
+            }
+        }
+
+        if (count > nums.length / 2) {
+            return candidate;
+        } else {
+            return -1; // No majority element
+        }
+    }
+
+    public static void main(String[] args) {
+        BoyerMooreVotingAlgorithm algorithm = new BoyerMooreVotingAlgorithm();
+        int[] nums = {3, 3, 4, 2, 4, 4, 2, 4, 4};
+        int result = algorithm.findMajorityElement(nums);
+        if (result != -1) {
+            System.out.println("The majority element is: " + result);
+        } else {
+            System.out.println("There is no majority element in the array.");
+        }
+    }
+}
