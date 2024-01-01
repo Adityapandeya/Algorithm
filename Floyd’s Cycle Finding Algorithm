@@ -10,5 +10,50 @@ The Fast pointer may reach the end (NULL) this shows that there is no loop in th
 The Fast pointer again catches the slow pointer at some time therefore a loop exists in the linked list.
 
 
+Floyd's Tortoise and Hare algorithm is commonly used for cycle detection in linked lists, but it can also be applied to find duplicate elements in an array. The idea is to treat the array as a linked list where the values represent indices to the next element. The algorithm involves two pointers: one moving at twice the speed of the other. If there is a loop in the linked list, the two pointers will eventually meet.
 
+Floyd's Tortoise and Hare Algorithm for Finding Duplicates:
+Initialize two pointers:
+
+Initialize two pointers, tortoise and hare, both pointing to the first element of the array.
+Movement:
+
+Move tortoise one step at a time.
+Move hare two steps at a time.
+Collision Check:
+
+If there is a duplicate element in the array, the tortoise and hare will eventually meet at the same index.
+Find the Duplicate:
+
+Once a collision is detected, reset one of the pointers to the beginning and move both pointers one step at a time until they meet again. The meeting point is the start of the cycle and the duplicate element.
+Example (Floyd's Tortoise and Hare Algorithm for Finding Duplicates):
+java
+Copy code
+public class FloydTortoiseHareExample {
+    static int findDuplicate(int[] nums) {
+        int tortoise = nums[0];
+        int hare = nums[0];
+
+        // Phase 1: Find the collision point
+        do {
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        } while (tortoise != hare);
+
+        // Phase 2: Find the start of the cycle (duplicate element)
+        tortoise = nums[0];
+        while (tortoise != hare) {
+            tortoise = nums[tortoise];
+            hare = nums[hare];
+        }
+
+        return tortoise;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 4, 2, 2};
+        int duplicate = findDuplicate(arr);
+        System.out.println("Duplicate Element: " + duplicate);
+    }
+}
 		
