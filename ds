@@ -75,13 +75,13 @@ def script(singer, count, duration, mail, output = 'mashup'):
     st.info('Mail Sent!')
     
 
-st.title('MixItUp')
-st.subheader('by Mayank Rawat')
+st.title('MixItUp Song')
+st.subheader('by Aditya Pandey')
 
 
 
 with st.form("my_form"):
-    singer = st.text_input('Name of Artist')
+    singer = st.text_input('Name of Artist/singer')
     count = st.slider('Number of Videos', 5, 40)
     duration = st.slider('Duration of Each Video (in seconds)', 20, 60)
     mail = st.text_input('Email Id')
